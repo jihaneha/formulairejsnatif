@@ -18,7 +18,7 @@
   <header class="row text-center border-bottom border-top border-dark border-5">
   <h2 class="fs-3 p-md-5 fw-bold" >Formulaire</h2>
   </header>
-  <form class="row bg-light p-3 p-md-5">
+  <form class="row bg-light p-3 p-md-5" id="form">
     <div class="row ">
       <div class="form-group col-md-6">
         <label for="name">Nom</label>
@@ -35,9 +35,10 @@
         <input type="text" class="form-control" id="nom-utili" placeholder="Nom d'utilisateur"  required="required" maxlength="15" minlength="3">
         <span id="nomutilisateur"></span>
       </div>
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-6" class="form-control">
         <label for="date">Date de naissance</label>
         <input type="date" class="form-control" id="date"  required="required">
+        <span id="datemanquante"></span>
       </div>
       <div class="form-group col-md-6">
         <label for="tel">Numero de téléphone</label>
@@ -51,10 +52,16 @@
       <div class="form-group col-md-6">
         <label for="inputPassword4">Mot de passe</label>
         <input type="password" class="form-control" id="inputPassword1" placeholder="Password"  required="required" minlength="8">
+        <span id="mdpmanquant"></span>
+        <br>
+        <input type="checkbox" id="check" onclick="afficher();">
+        
+        <label>afficher le mot de passe</label>
       </div>
       <div class="form-group col-md-6">
         <label for="inputPassword4">Veuillez confirmer votre mot de passe</label>
         <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm Password"  required="required">
+        <span id="mdpmanquant2"></span>
       </div>
     </div>
     <div class="form-group">

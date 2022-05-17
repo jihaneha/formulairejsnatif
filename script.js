@@ -61,7 +61,11 @@ let af = "afpa@afpa.com";
 let roo = "root@afpa.fr";
 let deu = "deus@afpa.org";
 function f_mailvalid(m) {
-  if (
+  if (mail.validity.valueMissing) {
+    m.preventDefault();
+    mailinvalid.textContent = "veuillez saisir une adresse email";
+    mailinvalid.style.color = "red";
+  } else if (
     mail.value.toLowerCase().trim() == af ||
     mail.value.toLowerCase().trim() == roo ||
     mail.value.toLowerCase().trim() == deu
@@ -71,3 +75,78 @@ function f_mailvalid(m) {
     mailinvalid.style.color = "red";
   }
 }
+
+// si la date de naissance est manquante + verification de l'age
+let date = document.getElementById("date");
+let datemanquante = document.getElementById("datemanquante");
+validation.addEventListener("click", f_datevalid);
+function f_datevalid(d) {
+  if (date.validity.valueMissing) {
+    d.preventDefault();
+    datemanquante.textContent = "veuillez saisir votre date de naissance";
+    datemanquante.style.color = "red";
+  } else {
+    let datevalue = date.value;
+    let birth_day = new Date(datevalue);
+    let birth_day_day = birth_day.getDate();
+    let birth_day_month = birth_day.getMonth();
+    let birth_day_year = birth_day.getFullYear();
+
+    let today_date = new Date();
+    let today_day = today_date.getDate();
+    let today_month = today_date.getMonth();
+    let today_year = today_date.getFullYear();
+
+    let calculate_age = 0;
+    if (today_month > birth_day_month) {
+      calculate_age = today_year - birth_day_year;
+    } else if (today_month == birth_day_month) {
+      if (today_day >= birth_day_day) {
+        calculate_age = today_year - birth_day_year;
+      } else {
+        calculate_age = today_year - birth_day_year - 1;
+      }
+      if (calculate_age < 21) {
+        d.preventDefault();
+        datemanquante.textContent = "vous avez pas 21 ans ";
+        datemanquante.style.color = "red";
+      } else {
+        d.preventDefault();
+        datemanquante.textContent = "yes , vous avez plus de 21ans ";
+        datemanquante.style.color = "red";
+      }
+    }
+  }
+}
+//afficher le mot de passe
+function afficher() {
+  let pass = document.getElementById("inputPassword1");
+  if (document.getElementById("check").checked) {
+    pass.setAttribute("type", "text");
+  } else {
+    pass.setAttribute("type", "password");
+  }
+}
+// si le champ du mdp est vide
+let pass = document.getElementById("inputPassword1");
+let mdpmanquant = document.getElementById("mdpmanquant");
+validation.addEventListener("click", f_mdpvalid);
+function f_mdpvalid(m) {
+  if (pass.validity.valueMissing) {
+    m.preventDefault();
+    mdpmanquant.textContent = "veuillez saisir un mot de pass";
+    mdpmanquant.style.color = "red";
+  }
+}
+// si l'utilisateur n'a pas comfirmé son mdp
+let pass2 = document.getElementById("inputPassword2");
+let mdpmanquant2 = document.getElementById("mdpmanquant2");
+validation.addEventListener("click", f_mdp2valid);
+function f_mdp2valid(m) {
+  if (pass2.validity.valueMissing) {
+    m.preventDefault();
+    mdpmanquant2.textContent = "veuillez confirmer votre mot de pass";
+    mdpmanquant2.style.color = "red";
+  }
+}
+//si les 2 mots de passes ne sont pas identiques
