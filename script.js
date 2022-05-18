@@ -150,3 +150,22 @@ function f_mdp2valid(m) {
   }
 }
 //si les 2 mots de passes ne sont pas identiques
+
+function f_mdpsvalid() {
+  let passprime = pass.value;
+  let pass2prime = pass2.value;
+  if (passprime !== pass2prime) {
+    alert("les mdp ne sont pas identiques");
+  }
+}
+//numero de telephone manquant
+let tel = document.getElementById("tel");
+let telspan = document.getElementById("telspan");
+validation.addEventListener("click", f_telvalid);
+function f_telvalid(t) {
+  if (tel.validity.valueMissing) {
+    t.preventDefault();
+    telspan.textContent = "veuillez saisir votre numero de téléphone";
+    telspan.style.color = "red";
+  }
+}
